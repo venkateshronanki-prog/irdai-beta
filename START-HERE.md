@@ -2,7 +2,11 @@
 
 This package is ready for source upload and private staging configuration. It has not been deployed or verified in a browser. No paid subscription or official domain is required.
 
-## 1. Upload source
+## 1. Source is already uploaded
+
+Application source and both PDFs were uploaded to GitHub on 16 November 2026. Proceed to step 2. The steps below are only for restoring a copy if needed.
+
+### Restore source if needed
 
 1. Extract this ZIP on your computer.
 2. Open https://github.com/venkateshronanki-prog/irdai-beta.
@@ -26,3 +30,4 @@ Do not click website Deploy yet. The database placeholder must be replaced and t
 Cloudflare Workers Git setup: project irdai-beta, build command npm ci, deployment command npx wrangler deploy. Staff access requires a dedicated Access application, explicit staff emails, MFA enforcement and role provisioning. We will verify the exact options and free-plan availability on your account before configuration. The staff API stays locked until configured.
 
 See README.md for implemented features and unfinished work.
+
