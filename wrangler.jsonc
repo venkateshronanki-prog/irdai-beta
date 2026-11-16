@@ -1,0 +1,8 @@
+{
+  "name": "irdai-beta",
+  "main": "worker/index.mjs",
+  "compatibility_date": "2026-11-14",
+  "assets": {"directory": "./public", "binding": "ASSETS", "run_worker_first": ["/api/*"]},
+  "d1_databases": [{"binding":"DB","database_name":"irdai-beta-content","database_id":"00000000-0000-0000-0000-000000000000","migrations_dir":"migrations"}],
+  "observability": {"enabled": true}
+}
