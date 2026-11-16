@@ -1,0 +1,11 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync,readdirSync,statSync} from 'node:fs';
+import {queryCatalogue,validateCatalogue} from '../public/catalogue-service.mjs';
+const c=JSON.parse(readFileSync(new URL('../public/catalogue.json',import.meta.url)));
+test('published catalogue is valid and compact',()=>{assert.equal(validateCatalogue(c),c);assert.ok(Buffer.byteLength(JSON.stringify(c))<20000);assert.equal(c.records.length,11)});
+test('search combines words and filters catalogue types',()=>{const d=queryCatalogue(c,'search?q=life+products&kind=circular');assert.ok(d.items.length);assert.ok(d.items.every(r=>r.kind==='circular'));assert.equal(queryCatalogue(c,'search?q=nonexistentphrase').items.length,0)});
+test('original PDF text is excluded from hosted catalogue',()=>{assert.ok(c.records.every(r=>(r.body||'').length<5000));assert.ok(!JSON.stringify(c).includes('Section X: Repeal'));assert.equal(c.records.find(r=>r.slug==='master-circular-life-products-2024').body,'')});
+test('source and regulatory links resolve to valid records',()=>{const r=queryCatalogue(c,'evolution');assert.equal(r.length,4);assert.ok(r.every(r=>r.predecessor_title&&r.successor_title));assert.ok(c.records.every(r=>!r.source_url||new URL(r.source_url).protocol==='https:'))});
+test('rejects invalid pagination and unsafe catalogue links',()=>{assert.throws(()=>queryCatalogue(c,'search?page=-1'));const bad=structuredClone(c);bad.records[0].source_url='javascript:alert(1)';assert.throws(()=>validateCatalogue(bad));bad.records[0].source_url='https://irdai.gov.in';bad.records.push(bad.records[0]);assert.throws(()=>validateCatalogue(bad))});
+test('deployment config has no database, storage or worker bindings',()=>{const config=JSON.parse(readFileSync(new URL('../wrangler.jsonc',import.meta.url)));assert.deepEqual(Object.keys(config).sort(),['assets','compatibility_date','name']);const files=[];const walk=dir=>{for(const n of readdirSync(dir)){const p=dir+'/'+n;statSync(p).isDirectory()?walk(p):files.push(p)}};walk(new URL('../public',import.meta.url).pathname.replace(/^\/([A-Z]:)/i,'$1'));assert.ok(!files.some(p=>/\.(pdf|sqlite|sql)$/i.test(p)))});
