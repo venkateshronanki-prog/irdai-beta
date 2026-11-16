@@ -1,0 +1,22 @@
+[
+  {
+    "url": "https://irdai.gov.in/documents/37343/991022/%E0%A4%85%E0%A4%82%E0%A4%97%E0%A5%8D%E0%A4%B0%E0%A5%87%E0%A4%9C%E0%A5%80%2B-%2B%E0%A4%9C%E0%A5%80%E0%A4%B5%E0%A4%A8%2B%E0%A4%AC%E0%A5%80%E0%A4%AE%E0%A4%BE%2B%E0%A4%89%E0%A4%A4%E0%A5%8D%E0%A4%AA%E0%A4%BE%E0%A4%A6%E0%A5%8B%E0%A4%82%2B%E0%A4%B8%E0%A4%82%E0%A4%AC%E0%A4%82%E0%A4%A7%E0%A5%80%2B%E0%A4%AE%E0%A4%BE%E0%A4%B8%E0%A5%8D%E0%A4%9F%E0%A4%B0%2B%E0%A4%AA%E0%A4%B0%E0%A4%BF%E0%A4%AA%E0%A4%A4%E0%A5%8D%E0%A4%B0%2B_%2BMaster%2BCircular%2Bon%2BLife%2BInsurance%2BProducts%2B-%2BEnglish.pdf/56f5b93b-a7c6-30cf-1734-0537e2d8676d?download=true&t=1733233169949&version=1.0",
+    "attemptedAt": "2026-11-16T17:27:11.898Z",
+    "httpStatus": 200,
+    "status": "downloaded",
+    "file": "b385a0a6834879067afa.pdf",
+    "bytes": 1102008,
+    "sha256": "b385a0a6834879067afa5877981e1c44f959f209ed2ab99f246670ca65dd7223",
+    "contentType": "application/pdf"
+  },
+  {
+    "url": "https://irdai.gov.in/documents/37343/620662/policyholder+complaints+registration+form29092021.pdf/5ff5e0af-a34e-6cba-91d2-fe053b076624?t=1633587167192",
+    "attemptedAt": "2026-11-16T17:29:44.656Z",
+    "httpStatus": 200,
+    "status": "downloaded",
+    "file": "4306ea4b9e5bf464baae.pdf",
+    "bytes": 699862,
+    "sha256": "4306ea4b9e5bf464baae376ddc92e49b553aeea8a54ab3539e2e71e018cf94cc",
+    "contentType": "application/pdf"
+  }
+]
