@@ -1,0 +1,64 @@
+{
+  "note": "Raw sizes and local gzip estimates, not measured Cloudflare traffic.",
+  "files": [
+    {
+      "file": "public/catalogue-service.mjs",
+      "bytes": 3789,
+      "gzipEstimate": 1664
+    },
+    {
+      "file": "public/catalogue.json",
+      "bytes": 11404,
+      "gzipEstimate": 1924
+    },
+    {
+      "file": "public/index.html",
+      "bytes": 1223,
+      "gzipEstimate": 669
+    },
+    {
+      "file": "public/navigation.mjs",
+      "bytes": 1975,
+      "gzipEstimate": 704
+    },
+    {
+      "file": "public/site.css",
+      "bytes": 7148,
+      "gzipEstimate": 2073
+    },
+    {
+      "file": "public/site.mjs",
+      "bytes": 9321,
+      "gzipEstimate": 3401
+    },
+    {
+      "file": "public/studio.html",
+      "bytes": 2097,
+      "gzipEstimate": 1088
+    },
+    {
+      "file": "public/studio.mjs",
+      "bytes": 5508,
+      "gzipEstimate": 2180
+    },
+    {
+      "file": "public/theme-engine.mjs",
+      "bytes": 746,
+      "gzipEstimate": 433
+    },
+    {
+      "file": "public/ui.mjs",
+      "bytes": 1496,
+      "gzipEstimate": 812
+    },
+    {
+      "file": "public/_headers",
+      "bytes": 377,
+      "gzipEstimate": 238
+    }
+  ],
+  "totalBytes": 45084,
+  "catalogueBytes": 11404,
+  "databases": 0,
+  "hostedOriginalDocuments": 0
+}
