@@ -1,0 +1,7 @@
+import {catalogueQuery} from './catalogue-service.mjs';
+import {applyTheme} from './theme-engine.mjs';
+export const el=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined&&text!==null)n.textContent=text;if(cls)n.className=cls;return n};
+export function link(text,href,cls){const a=el('a',text,cls);a.href=href;return a}
+export async function api(path,options={}){if(options.method&&options.method!=='GET')throw Error('Publishing uses GitHub review.');return catalogueQuery(path)}
+const fallback=[{id:'institutional',label:'Institutional ivory',tokens:{background:'#F7F5EF',surface:'#FFFFFF',text:'#172C43',muted:'#526274',accent:'#806025',border:'#D8DFE5',font:'system-ui',radius:'8px',spacing:'20px'}},{id:'midnight',label:'Midnight editorial',tokens:{background:'#101C28',surface:'#1A2A39',text:'#F4F4EF',muted:'#B9C8D3',accent:'#E0BE80',border:'#3C5063',font:'system-ui',radius:'8px',spacing:'20px'}}];
+export function themePicker(select){let themes=fallback;function load(items){themes=items;select.replaceChildren();for(const t of themes){const o=el('option',t.label);o.value=t.id;select.append(o)}let saved;try{saved=localStorage.getItem('irdai-theme-id')}catch{}const active=themes.find(t=>t.id===saved)||themes[0];if(active){select.value=active.id;applyTheme(active)}}load(themes);select.onchange=()=>applyTheme(themes.find(t=>t.id===select.value));api('themes').then(items=>{if(items.length)load(items.map(t=>({...t,tokens:JSON.parse(t.tokens)})))}).catch(()=>{});}
