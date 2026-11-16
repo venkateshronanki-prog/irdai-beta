@@ -1,0 +1,13 @@
+PRAGMA foreign_keys=ON;
+CREATE TABLE content(id INTEGER PRIMARY KEY,slug TEXT NOT NULL UNIQUE,title TEXT NOT NULL,kind TEXT NOT NULL,body TEXT NOT NULL DEFAULT '',summary TEXT NOT NULL DEFAULT '',reference TEXT NOT NULL DEFAULT '',document_date TEXT,source_url TEXT,status TEXT NOT NULL DEFAULT 'draft' CHECK(status IN('draft','published')));
+CREATE INDEX content_status_date ON content(status,document_date DESC);
+CREATE INDEX content_kind_date ON content(status,kind,document_date DESC);
+CREATE VIRTUAL TABLE content_search USING fts5(title,reference,body,content='content',content_rowid='id',tokenize='unicode61');
+CREATE TRIGGER content_insert AFTER INSERT ON content BEGIN INSERT INTO content_search(rowid,title,reference,body) VALUES(new.id,new.title,new.reference,new.body); END;
+CREATE TRIGGER content_delete AFTER DELETE ON content BEGIN INSERT INTO content_search(content_search,rowid,title,reference,body) VALUES('delete',old.id,old.title,old.reference,old.body); END;
+CREATE TRIGGER content_update AFTER UPDATE ON content BEGIN INSERT INTO content_search(content_search,rowid,title,reference,body) VALUES('delete',old.id,old.title,old.reference,old.body); INSERT INTO content_search(rowid,title,reference,body) VALUES(new.id,new.title,new.reference,new.body); END;
+CREATE TABLE relationships(id INTEGER PRIMARY KEY,predecessor INTEGER NOT NULL REFERENCES content(id),successor INTEGER NOT NULL REFERENCES content(id),relationship TEXT NOT NULL CHECK(relationship IN('amends','repeals','supersedes','clarifies','consolidates')),evidence_url TEXT NOT NULL,evidence_note TEXT NOT NULL,effective_date TEXT,CHECK(predecessor<>successor),UNIQUE(predecessor,successor,relationship));
+CREATE INDEX relationships_successor ON relationships(successor);
+CREATE TABLE navigation(slug TEXT PRIMARY KEY,title TEXT NOT NULL,group_name TEXT NOT NULL,position INTEGER NOT NULL);
+CREATE TABLE themes(id TEXT PRIMARY KEY,label TEXT NOT NULL,tokens TEXT NOT NULL CHECK(json_valid(tokens)),enabled INTEGER NOT NULL DEFAULT 1,position INTEGER NOT NULL DEFAULT 0);
+INSERT INTO themes(id,label,tokens,position) VALUES('institutional','Institutional ivory','{"background":"#F7F5EF","surface":"#FFFFFF","text":"#172C43","muted":"#526274","accent":"#806025","border":"#D8DFE5","font":"system-ui","radius":"8px","spacing":"20px"}',0),('midnight','Midnight editorial','{"background":"#101C28","surface":"#1A2A39","text":"#F4F4EF","muted":"#B9C8D3","accent":"#E0BE80","border":"#3C5063","font":"system-ui","radius":"8px","spacing":"20px"}',1);
